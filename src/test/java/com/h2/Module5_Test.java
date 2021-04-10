@@ -68,7 +68,10 @@ public class Module5_Test {
 
         final Class<?> aClass = maybeClass.get();
 
-        final Set<String> fieldNames = Set.of("BEST_LOAN_RATES", "SAVINGS_CALCULATOR", "MORTGAGE_CALCULATOR");
+        final Set<String> fieldNames =new HashSet<>();
+        fieldNames.add("BEST_LOAN_RATES");
+        fieldNames.add("SAVINGS_CALCULATOR");
+        fieldNames.add("MORTGAGE_CALCULATOR");
         for (String fieldName : fieldNames) {
             try {
                 Field field = aClass.getDeclaredField(fieldName);
@@ -108,11 +111,10 @@ public class Module5_Test {
             field.setAccessible(true);
             assertEquals(Map.class, field.getType(), fieldName + " must be of type 'Map<String, String>'");
 
-            final Map<String, String> expected = Map.of(
-                    "bestLoanRates", "usage: bestLoanRates",
-                    "savingsCalculator", "usage: savingsCalculator <credits separated by ','> <debits separated by ','>",
-                    "mortgageCalculator", "usage: mortgageCalculator <loanAmount> <termInYears> <annualRate>"
-            );
+            final Map<String, String> expected =new HashMap<>();
+            expected.put("bestLoanRates", "usage: bestLoanRates");
+            expected.put("savingsCalculator", "usage: savingsCalculator <credits separated by ','> <debits separated by ','>");
+            expected.put("mortgageCalculator", "usage: mortgageCalculator <loanAmount> <termInYears> <annualRate>");
 
             @SuppressWarnings("unchecked")
             Map<String, String> commandsToUsage = (Map<String, String>) field.get(null);

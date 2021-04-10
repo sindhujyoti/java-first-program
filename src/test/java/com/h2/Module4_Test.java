@@ -65,12 +65,11 @@ public class Module4_Test {
         final Optional<Class<?>> maybeMortgageCalculator = getMortgageClass();
         assertTrue(maybeMortgageCalculator.isPresent(), classToFind + " must exist");
         final Class<?> mortgageCalculator = maybeMortgageCalculator.get();
-        final Map<String, Class<?>> expectedFieldsToClass = Map.of(
-                "loanAmount", long.class,
-                "termInYears", int.class,
-                "annualRate", float.class,
-                "monthlyPayment", double.class
-        );
+        final Map<String, Class<?>> expectedFieldsToClass = new HashMap<>();
+        expectedFieldsToClass.put("loanAmount", long.class);
+        expectedFieldsToClass.put("termInYears", int.class);
+        expectedFieldsToClass.put("annualRate", float.class);
+        expectedFieldsToClass.put("monthlyPayment", double.class);
 
         final Field[] declaredFields = mortgageCalculator.getDeclaredFields();
         assertEquals(4, declaredFields.length, "4 fields (loanAmount, termInYears, annualRate, monthlyPayment) should be available in " + classToFind);
